@@ -73,8 +73,8 @@ public class Svatky {
      */
     public boolean jeVSeznamu(String jmeno) {
         //TODO
-        svatky.containsKey(jmeno);
-        return true;
+
+        return svatky.containsKey(jmeno);
     }
 
     /**

@@ -1,5 +1,6 @@
 package cz.czechitas.lekce7;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.time.Month;
@@ -7,6 +8,8 @@ import java.time.MonthDay;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
 
 /**
  * @author Filip Jirsák
@@ -29,6 +32,11 @@ class SvatkyTest {
     @Test
     void jeVSeznamu() {
         //TODO Otestovat, že najde v seznamu existující jméno a nenajde neexistující jméno
+        Svatky svatky = new Svatky();
+        assertEquals(true, svatky.jeVSeznamu("Vilém"));
+
+        Svatky svatky2 = new Svatky();
+        assertEquals(false, svatky2.jeVSeznamu("Zero"));
     }
 
     /**
@@ -37,6 +45,9 @@ class SvatkyTest {
     @Test
     void getPocetJmen() {
         //TODO Otestovat, že vrací počet jmen, která máme v seznamu
+        Svatky svatky = new Svatky();
+        // int kolikJmen = svatky.size(37);
+        assertEquals(37, svatky.getPocetJmen());
     }
 
     /**
@@ -45,6 +56,9 @@ class SvatkyTest {
     @Test
     void getSeznamJmen() {
         //TODO Zkontrolovat, že seznam jmen má správný počet položek.
+        Svatky svatky = new Svatky();
+      //  int pocetJmen = svatky.getPocetJmen();
+        assertEquals(37, svatky.getSeznamJmen().size());
     }
 
     /**
@@ -53,6 +67,10 @@ class SvatkyTest {
     @Test
     void pridatSvatekDenMesicInt() {
         //TODO Otestuje, že je jméno v seznamu svátků a že má přiřazen správný den
+        Svatky svatky = new Svatky();
+        svatky.pridejSvatek("Josef",1,1);
+        assertEquals(true, svatky.jeVSeznamu("Josef"));
+        assertEquals(MonthDay.of(1,1), svatky.vratKdyMaSvatek("Josef"));
     }
 
     /**
@@ -61,6 +79,11 @@ class SvatkyTest {
     @Test
     void pridatSvatekDenMesicMonth() {
         //TODO Otestuje, že je jméno v seznamu svátků a že má přiřazen správný den
+        Svatky svatky = new Svatky();
+        svatky.pridejSvatek("František", 2, Month.FEBRUARY);
+        assertEquals(true, svatky.jeVSeznamu("František"));
+        assertEquals(MonthDay.of(2,2), svatky.vratKdyMaSvatek("František"));
+
     }
 
     /**
@@ -69,6 +92,10 @@ class SvatkyTest {
     @Test
     void prridatSvatekMonthDay() {
         //TODO Otestuje, že je jméno v seznamu svátků a že má přiřazen správný den
+        Svatky svatky = new Svatky();
+        svatky.pridejSvatek("Tadeáš",MonthDay.of(3,3));
+        assertEquals(true, svatky.jeVSeznamu("Tadeáš"));
+        assertEquals(MonthDay.of(3,3), svatky.vratKdyMaSvatek("Tadeáš"));
     }
 
     /**
@@ -77,5 +104,8 @@ class SvatkyTest {
     @Test
     void smazatSvatek() {
         //TODO Zkontrolovat, že po smazání bude počet svátků odpovídat novému počtu.
+        Svatky svatky = new Svatky();
+        svatky.smazSvatek("Klaudie");
+        assertEquals(false, svatky.jeVSeznamu("Klaudie"));
     }
 }
